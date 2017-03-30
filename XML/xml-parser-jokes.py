@@ -27,12 +27,13 @@ class CounterHandler(ContentHandler):
     def startElement (self, name, attrs):
         if name == 'joke':
             self.title = normalize_whitespace(attrs.get('title'))
+            #aqui escribe el titulo jj
             print " title: " + self.title + "."
         elif name == 'start':
             self.inContent = 1
         elif name == 'end':
             self.inContent = 1
-            
+
     def endElement (self, name):
         if self.inContent:
             self.theContent = normalize_whitespace(self.theContent)
@@ -45,11 +46,11 @@ class CounterHandler(ContentHandler):
         if self.inContent:
             self.inContent = 0
             self.theContent = ""
-        
+
     def characters (self, chars):
         if self.inContent:
             self.theContent = self.theContent + chars
-            
+
 # --- Main prog
 
 if len(sys.argv)<2:
@@ -57,7 +58,7 @@ if len(sys.argv)<2:
     print
     print " <document>: file name of the document to parse"
     sys.exit(1)
-    
+
 # Load parser and driver
 
 JokeParser = make_parser()
